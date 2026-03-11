@@ -168,15 +168,13 @@ export const DesktopSidebar = ({ className, children, ...props }) => {
 export const SidebarLink = ({ link, className, ...props }) => {
   const { open, animate } = useSidebar();
   const iconRef = useRef(null);
-  const labelRef = useRef(null);
 
   useEffect(() => {
     if (!animate) return;
 
     const icon = iconRef.current;
-    const label = labelRef.current;
 
-    if (icon && label) {
+    if (icon) {
       const iconHover = gsap.to(icon, {
         scale: 1.1,
         rotation: 5,
@@ -185,22 +183,12 @@ export const SidebarLink = ({ link, className, ...props }) => {
         paused: true,
       });
 
-      const labelHover = gsap.to(label, {
-        x: 2,
-        opacity: 1,
-        duration: 0.3,
-        ease: "power2.out",
-        paused: true,
-      });
-
       const handleMouseEnter = () => {
         iconHover.play();
-        labelHover.play();
       };
 
       const handleMouseLeave = () => {
         iconHover.reverse();
-        labelHover.reverse();
       };
 
       icon.addEventListener("mouseenter", handleMouseEnter);
@@ -224,7 +212,6 @@ export const SidebarLink = ({ link, className, ...props }) => {
     >
       <div ref={iconRef} className="flex-shrink-0">{link.icon}</div>
       <motion.span
-        ref={labelRef}
         variants={labelVariants}
         initial="hidden"
         animate={open ? "visible" : "hidden"}

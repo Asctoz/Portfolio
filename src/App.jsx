@@ -284,7 +284,7 @@ const Dashboard = () => {
               Total Projects
             </h3>
             <p className="text-base sm:text-lg font-bold text-neutral-900 dark:text-white font-poppins">
-              6 Recognized | +12 Not mentioned
+              9 | few not mentioned
             </p>
           </div>
           <div className="text-2xl">📃</div>
@@ -322,7 +322,7 @@ const Dashboard = () => {
               Projects Completed
             </h3>
             <p className="text-lg sm:text-xl font-bold text-neutral-900 dark:text-white font-poppins">
-              2
+              4
             </p>
           </div>
           <div className="text-2xl">⚒️</div>
@@ -332,37 +332,91 @@ const Dashboard = () => {
         <div className="h-auto sm:h-full w-full rounded-xl bg-gray-100 dark:bg-neutral-800 p-4 sm:p-6 shadow-lg">
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-base sm:text-lg font-semibold text-neutral-800 dark:text-neutral-200 font-poppins">
-              Recent Activity
+             Recent Activity
             </h3>
           </div>
-          <ul className="space-y-3">
-            {[
-              "Currently Working On {AI WEBSITE CREATOR} - (PYTHON/HTML/CSS) *STARTING SOON",
-              "Made/Helped making school PDC website - (CSS/JS[REACT] + Aceternity + Tailwindcss/framer-motion) *FININSHED",
-              "Made AI education chat bot - (PYTHON[Gemini AI + SpeechRecognition + Pyttsx3 + misc]) *MINOR UPGRADES / HARDWARE PENDING...",
-              "Started - Portfolio Project - (JS[REACT] + Aceternity + Tailwindcss/framer-motion/gsap/Base-CSS) *ONGOING",
-              "TaskManager TaskFlows - (JS/HTML/CSS) *ABANDONED",
-              "Roblox Fading FootSteps - (LUA) *ABANDONED, MULTIPLE PARTS COMPLETE",
-            ].map((activity, idx) => (
-              <motion.li
-                key={idx}
-                className="flex items-center gap-2 p-2 rounded-md"
-                variants={activityVariants}
-                initial="hidden"
-                animate="visible"
-                whileHover="hover"
-                whileTap="tap"
-                custom={idx}
-              >
-                <span className="text-neutral-700 dark:text-neutral-300">➔</span>
-                <div>
-                  <p className="text-xs sm:text-sm text-neutral-700 dark:text-neutral-300 font-poppins">
-                    {activity}
-                  </p>
-                </div>
-              </motion.li>
-            ))}
-          </ul>
+
+          {/*
+            Activity data with explicit status
+          */}
+          {(() => {
+            const activities = [
+              {
+                text: "AI WEBSITE CREATOR - (PYTHON)",
+                status: "Completed",
+              },
+              {
+                text: "Made/Helped making school PDC website - (CSS|JS[REACT])",
+                status: "Completed",
+              },
+              {
+                text: "Made AI education chat bot - (PYTHON)",
+                status: "Completed",
+              },
+              {
+                text: "Made AI education chat bot - (PYTHON)",
+                status: "Completed",
+              },
+              {
+                text: "Project RBLX : Find The AI - (PYTHON|LUA)",
+                status: "Ongoing",
+              },
+              {
+                text: "Project RBLX : The Button Game - (LUA)",
+                status: "Ongoing",
+              }, 
+              {
+                text: "Gesture Control Glass Mousepad - (C++/PYTHON)",
+                status: "Ongoing",
+              },
+              {
+                text: "TaskManager TaskFlows - (JS/HTML/CSS)",
+                status: "Abandoned",
+              },
+              {
+                text: "Roblox Fading FootSteps - (LUA)",
+                status: "Abandoned",
+              },
+            ];
+
+            return (
+              <ul className="space-y-3">
+                {activities.map((activity, idx) => (
+                  <motion.li
+                    key={idx}
+                    className="flex items-center justify-between gap-3 p-2 rounded-md"
+                    variants={activityVariants}
+                    initial="hidden"
+                    animate="visible"
+                    whileHover="hover"
+                    whileTap="tap"
+                    custom={idx}
+                  >
+                    <div className="flex items-center gap-2">
+                      <span className="text-neutral-700 dark:text-neutral-300">➔</span>
+
+                      <p className="text-xs sm:text-sm text-neutral-700 dark:text-neutral-300 font-poppins">
+                        {activity.text}
+                      </p>
+                    </div>
+
+                    {/* Status Bubble */}
+                    <span
+                      className={`px-2 py-1 text-[10px] sm:text-xs font-semibold rounded-full ${
+                        activity.status === "Completed"
+                          ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                          : activity.status === "Ongoing"
+                          ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200"
+                          : "bg-red-100 text-red-800 dark:bg-red-500 dark:text-red-100"
+                      }`}
+                    >
+                      {activity.status}
+                    </span>
+                  </motion.li>
+                ))}
+              </ul>
+            );
+          })()}
         </div>
         <div className="h-auto sm:h-full w-full rounded-xl bg-gray-100 dark:bg-neutral-800 p-4 sm:p-6 shadow-lg">
           <h3 className="text-base sm:text-lg font-semibold text-neutral-800 dark:text-neutral-200 mb-4 font-poppins">
@@ -370,12 +424,14 @@ const Dashboard = () => {
           </h3>
           {[
             { name: "Project PDC", percentage: 100, color: "bg-green-500" },
-            { name: "Project Edu-ChatBot", percentage: 90, color: "bg-green-300" },
-            { name: "Project F.Footsteps", percentage: 85, color: "bg-green-200" },
-            { name: "Project Portfolio", percentage: 20, color: "bg-orange-500" },
-            { name: "Project AI WEBDEV", percentage: 1, color: "bg-red-500" },
-            { name: "Project TaskFlows", percentage: 25, color: "bg-red-400" },
-            { name: "null", percentage: 0, color: "bg-gray-500" },
+            { name: "Project Edu-ChatBot", percentage: 100, color: "bg-green-500" },
+            { name: "Project AI WEBDEV", percentage: 100, color: "bg-green-500" },
+            { name: "Project Roblox : Find the AI", percentage: 30, color: "bg-red-400" },
+            { name: "Gesture Control Glass Mousepad", percentage: 25, color: "bg-red-400" },
+            { name: "Project Roblox : The Button Game", percentage: 10, color: "bg-red-400" },
+            { name: <>Project Roblox : Fading Footsteps <span className="text-red-500">* Abandoned</span></>, percentage:75, color: "bg-red-200" },
+            { name: <>Project TaskFlows <span className="text-red-500">* Abandoned</span></>, percentage: 25, color: "bg-red-400" },
+            
           ].map((project, idx) => (
             <div key={idx} className="space-y-2 mt-2">
               <div className="flex justify-between items-center">
@@ -451,7 +507,7 @@ const About = () => {
       >
         Hi! I’m Asctoz - 'Online Name | Persona', a passionate developer who loves programming, trying out new stuff, creating cool projects, playing video games and etc.. This portfolio showcases my work, journey and skills. I’m always looking to learn and grow, so feel free to reach out if you want to collaborate or just chat!
         <pre className="mt-2">
-          <i className="text-sm">honorable mention - Grok</i>
+          <i className="text-sm">honorable mention - Chatgpt</i>
         </pre>
       </motion.p>
 
@@ -469,7 +525,7 @@ const About = () => {
           My Journey
         </h2>
         <p className="text-sm sm:text-base text-neutral-700 dark:text-neutral-300 font-poppins">
-          I started coding in Middle School with basic LUA, building simple games for fun. Over time, I discovered CSS and fell in love with its customization, using it for everything from designing frontend projects to making animations. I also started with intermediate Python - Later, I dived into JavaScript and React, which opened up a whole new world of interactive web development. Now, I’m constantly learning and developing these languages further and building projects that push my skills further!
+          I started coding around 4th grade with basic LUA, building simple games for fun. Over time, I discovered CSS and fell in love with its customization, using it for everything from designing frontend projects to making animations. I also started with intermediate Python - Later, I dived into JavaScript and React, which opened up a whole new world of interactive web development. Now, I’m currently learning more about Computer engeneering starting off with C++ and some personal IOT projects. Also a quick note that not all my projects will be mentioned here b ecause i've had too many small projects and experiments, but the ones listed here are the ones I’m most proud of and want to showcase!
         </p>
       </motion.div>
 
@@ -489,10 +545,12 @@ const About = () => {
         </h2>
         <div className="space-y-3">
           {[
-            { name: "React", level: 40 },
-            { name: "Python", level: 55 },
-            { name: "HTML/CSS", level: 90 },
-            { name: "JavaScript", level: 35 },
+            { name: "React", level: 70 },
+            { name: "Next", level: 40 },
+            { name: "C++", level: 35 },
+            { name: "Python", level: 85 },
+            { name: "HTML/CSS", level: 100 },
+            { name: "JavaScript", level: 65 },
             { name: "Lua", level: 95 },
           ].map((skill, idx) => (
             <div key={idx}>
@@ -531,7 +589,7 @@ const About = () => {
           Hobbies
         </h2>
         <p className="text-sm sm:text-base text-neutral-700 dark:text-neutral-300 font-poppins">
-          When I’m not coding, I enjoy playing video games, experimenting with Logic operations in any language. I also love watching & reading sci-fi novels & movies and editing videos.
+          When I’m not coding, I enjoy playing video games or building self targetted projects meant to help my daily life. I also love watching & reading sci-fi novels & movies and editing videos.
         </p>
       </motion.div>
 
@@ -593,18 +651,22 @@ const About = () => {
 
 const GoalsProgress = () => {
   const learningGoals = [
-    "Deepen my understanding of React and Javascript by building more complex projects.",
-    "Learn advance python to build better apps.",
-    "Explore backend development with Node.js and Express.",
-    "Learn Fullstack development with MERN stack.",
-    "Dive into other languages like C++ and Kothlin.",
+    "Solidify my javascript concepts",
+    "Advance more in Python",
+    "Started Backend already with Python. Use the same for webdev.",
+    "Fully grasp IOT with various physics concepts and robotics.",
+    "Swap to Typescript",
+    "Learn C++ to an mastered level",
+    "Use C++ to get into game development and systems programming",
+    "Complete more projects and have fun.",
   ];
 
   const achievements = [
-    "Built a school PDC website using React, Tailwind CSS, and Framer Motion.",
+    "Built our school's PDC website.",
     "Created an AI education chatbot with Python and Gemini AI.",
-    "Developed a portfolio website (this one!) to showcase my projects.",
-    "Experimented with Lua to create game mechanics in Roblox.",
+    "Made multiple IOT and chemistry/physics based projects.",
+    "Used Lua to create game mechanics in Roblox.",
+    "Created my own capacitive touch layer.",
   ];
 
   return (
@@ -654,7 +716,7 @@ const GoalsProgress = () => {
           ))}
         </ul>
         <p className="text-sm sm:text-base text-neutral-700 dark:text-neutral-300 font-poppins mt-4">
-          I want to learn these skills because I believe they’ll make me a more versatile developer. React will help me build more reactive frontends, while Node.js will open doors to backend and intelligent systems. My goal is to create projects that not only look good but also be efficient.
+          I want to learn these skills because I believe they’ll make me a more versatile developer. With a goal  of being an independent developer who can create IOT, Webdev, Gamedev, AppDev and try making servers and systems.
         </p>
       </motion.div>
 
@@ -690,7 +752,7 @@ const GoalsProgress = () => {
           What I’ve Achieved So Far
         </h2>
         <p className="text-sm sm:text-base text-neutral-700 dark:text-neutral-300 font-poppins mb-4">
-          I’m proud of the milestones I’ve reached on my coding journey. Here are some of my key achievements:
+          The proud of the milestones I’ve reached on my coding journey.
         </p>
         <ul className="space-y-2">
           {achievements.map((achievement, idx) => (
@@ -731,16 +793,8 @@ const ViewableProjects = () => {
       description: "An AI-powered chatbot to assist with education, using speech recognition and text-to-speech.",
       tech: ["Python", "Gemini AI", "SpeechRecognition"],
       link: "https://github.com/Asctoz/Bot",
-      status: "Ongoing",
+      status: "Completed",
       emoji: "🤖",
-    },
-    {
-      title: "Asctoz Portfolio",
-      description: "My personal portfolio showcasing my projects, skills, and journey as a developer. i.e. THIS!",
-      tech: ["React", "Tailwind CSS", "GSAP"],
-      link: "#",
-      status: "Ongoing",
-      emoji: "📁",
     },
     {
       title: "Fading Footsteps",
@@ -750,6 +804,7 @@ const ViewableProjects = () => {
       status: "Abandoned",
       emoji: "👣",
     },
+
   ];
 
   return (
@@ -779,7 +834,7 @@ const ViewableProjects = () => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
       >
-        Check out my public projects! Click on any project to visit its live demo or repository.
+        Check out my public projects! Click on any project to visit its live demo or repository. <hr className="my-4" />Note: Not all projects are listed here as many are still private or on my local system but more should come in the future.
       </motion.p>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 z-10">
         {projects.map((project, idx) => (
